@@ -1,0 +1,48 @@
+
+.container {
+    text-align: center;
+    margin-top: 15%;
+    margin-left: 30%;
+    width: 40%;
+    }
+    .let flight of flights{
+    cursor: grab;
+    }
+    h2 {
+    background-color: rgb(32, 45, 87);
+    color: white;
+    }
+    
+    table {
+    margin-left: 15%;
+    font-size: 20px;
+    }
+    
+    a {
+    color:lawngreen;
+    cursor: pointer;
+    text-decoration: underline;
+    }
+    
+    p {
+    font-size: 18px;
+    }
+    
+    input {
+    border: none;
+    border-bottom: 1px solid #000000;
+    }
+    
+    button {
+    cursor: pointer;
+    height: 30px;
+    width: 120px;
+    background-color: blue;
+    color: white;
+    }
+    thead{
+    color: aliceblue;
+    }
+    tbody{
+        color: mediumaquamarine;
+    }

@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="availableFlights" *ngIf="availableFlightsTab">
+    <h2>Available Flights</h2>
+    <table border='1'>
+    <thead>
+    <tr>
+    <th>#</th>
+    <th>Flight</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Date</th>
+    <th>Fare</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let flight of flights">
+    <td>{{ flight.flightId }}</td>
+    <td>{{ flight.name }}</td>
+    <td>{{ flight.from }}</td>
+    <td>{{ flight.to }}</td>
+    <td>{{ flight.date | date: 'mediumDate' }}</td>
+    <td>{{ flight.fare }}</td>
+    <td><a (click)="book(flight)">Book</a></td>
+    
+     </tr>
+    </tbody>
+    </table><br><br>
+    <button (click)="searchBooking()">Search Booking</button>
+    </div>
+    <div class="flightSearch" *ngIf="bookTab">
+    <h2>Flight Search</h2>
+    <form style="font-size: 20px;">
+    Traveling From : <input type="text" value="{{this.flight.from}}"><br>
+    Going To : <input type="text" value="{{this.flight.to}}"><br>
+    Planning on : <input value="{{this.flight.date|date:'mediumDate'}}"><br><br>
+    <button type="submit" (click)="submitFlight()">Submit</button>
+    </form>
+    </div>
+    <div class="passengerDetails" *ngIf="passengerTab">
+    <h2>Selected Flight</h2>
+    <b style="color: aliceblue ; font-size :25px" >{{this.flight.name}} {{this.flight.from}} {{this.flight.to}} {{this.flight.date|date:'mediumDate'}} {{this.flight.fare}} /-</b>
+    <form name="form1" style="font-size: 20px;">
+    First Name : <input type="text" required [(ngModel)]='booking.passengerFirstName' name='passengerFirstName' #passengerFirstName='ngModel' placeholder="First Name">
+    <div *ngIf='passengerFirstName.errors && (passengerFirstName.dirty || passengerFirstName.touched)'>
+    <div [hidden]='!passengerFirstName.errors.required' style='color: red; text-align: left; padding-left: 250px; font-size: 15px; '>First Name is required</div>
+    </div><br>
+    Last Name : <input type="text" required [(ngModel)]='booking.passengerLastName' name='passengerLastName' #passengerLastName='ngModel' placeholder="Last Name">
+    <div *ngIf='passengerLastName.errors && (passengerLastName.dirty || passengerLastName.touched)'>
+    <div [hidden]='!passengerLastName.errors.required' style='color: red; text-align: left; padding-left: 250px; font-size: 15px;'>Last Name is required</div>
+    </div><br>
+    Gender : <select>
+    <option>-select-</option>
+    <option>Male</option>
+    <option>Female</option>
+    </select><br><br>
+    <button [disabled]="passengerFirstName.errors?.required || passengerLastName.errors?.required" type="submit" (click)="submitPassenger()">Submit</button>
+    </form>
+    </div>
+    <div class="bookingConfirmation" *ngIf="bookingConfirmTab">
+    <p style="font-size: 20px;"><b>{{ this.message }}</b></p>
+    <button (click)="back()">Back</button>
+    </div>
+    <div class="bookingSearch" *ngIf="bookingSearchTab">
+    <label><b style="font-size: 20px">Booking Reference</b></label> &nbsp;&nbsp;&nbsp;
+    <input type="number" [(ngModel)]="bookingId"><br><br>
+    <button (click)="searchForBooking(bookingId)">SEARCH</button><br>
+    <span *ngIf="this.message.length > 0"><b style="color: aliceblue ; font-size : 20px;">{{ this.message }} <a (click)="checkIn()">CheckIn</a></b></span>
+    </div>
+    <div class="checkin" *ngIf="checkInTab">
+    <p *ngIf="this.message.length > 0" style="color:lawngreen;"><b>{{ this.message }}</b></p><br>
+    <button (click)="back()">Back</button>
+    </div>
+    </div>
